@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang"en">
+<head>
+<style type="text/css">
+
+body {
+	text-align: center;
+	font-family: "Courier New", Courier, Monaco, monospace;
+}
+
+iframe {
+	width: 500px;
+	height: 200px;
+	border: 0px;
+	background: #eee;
+}
+
+#selection {
+
+	text-align: center;
+
+}
+
+p, legend {
+	text-decoration: none;
+	font-size: 0.8em;
+	
+}
+
+</style>
+<meta charset="utf-8" />
+<title></title>
+<script src="housework.js"></script>
+</head>
+<body>
+
+<h1>ItoA</h1>
+
+<div id="selection">
+	<form method="post" enctype="multipart/form-data" action="get_image.php" target="uploadframe">
+			<p>Upload a photo:</p>
+			<input name="file" id="file" size="27" type="file" /><br/>
+			<p><b>OR</b></p>
+			<p>Get an image from a URL:</p>
+			<input type="text" size="50" name="url_image" /><br/>
+<!--
+			<p>Set Width:
+			<input type="text" name="width" size="10"/></p>
+-->
+			<p><input type="submit" name="submit" value="Convert to ASCII" /></p>
+			<iframe id="uploadframe" name="uploadframe" src="" ></iframe>
+	</form>
+</div>
+
+
+
+</body>
+</html>
