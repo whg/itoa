@@ -24,6 +24,13 @@ def doimage(inputfile, outputfile, desiredwidth, forfile):
 	
 	#now get the pixel data in list form
 	pixels = list(img.getdata())
+	pixeldata = []
+	
+	try:
+		if(len(pixels[0]) == 3):
+			pixeldata = [(r+g+b)/3 for r,g,b in pixels]
+	except TypeError:
+		pixeldata = pixels
 	
 	f = open("./"+datafile, 'r');
 	sr = pickle.load(f);
@@ -33,9 +40,7 @@ def doimage(inputfile, outputfile, desiredwidth, forfile):
 	
 		i = 0
 		
-		for r,g,b in pixels:	
-
-			target = (r+g+b)/3
+		for target in pixeldata:	
 			
 			#find closest number bigger than target...
 			p = bisect.bisect_right([x for x,y in sr], target)

@@ -67,14 +67,20 @@ if($response == "") {
 	
 	//excute python script with the right PATH
 	exec("PATH=/opt/local/bin:/opt/local/sbin:$PATH; $call", $a, $b);
-	
+	print_r($a);
+	print_r($b);
+		
 	echo($call);
 	
 	//open file and get response
 	$response = file_get_contents("./ascii/$oname.txt");
 }
 
+if($response == "") {
+	$response = "sorry, couldn't do it with that file...";
+}
+
 //spit out the response
-echo('<p id="response">'.$response.'</p>');
+echo('<p id="response">'.$response.'</p><p id="imagename" class="hide">'.$name.'</p>');
 
 ?>
