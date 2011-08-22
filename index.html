@@ -6,13 +6,13 @@
 body {
 	text-align: center;
 	font-family: "Courier New", Courier, Monaco, monospace;
+	margin: 50px;
 }
 
 iframe {
-	width: 500px;
-	height: 200px;
+	width: 0px;
+	height: 0px;
 	border: 0px;
-	background: #eee;
 }
 
 #selection {
@@ -25,6 +25,13 @@ p, legend {
 	text-decoration: none;
 	font-size: 0.8em;
 	
+}
+
+#result {
+	font-family: Courier, monospace;
+	font-size: 0.7em;
+	line-height: 0.7em;
+/* 	letter-spacing: 0.2em; */
 }
 
 </style>
@@ -43,16 +50,13 @@ p, legend {
 			<p><b>OR</b></p>
 			<p>Get an image from a URL:</p>
 			<input type="text" size="50" name="url_image" /><br/>
-<!--
-			<p>Set Width:
-			<input type="text" name="width" size="10"/></p>
--->
+			<p>For File?<input type="checkbox" name="forfile" /></p>
 			<p><input type="submit" name="submit" value="Convert to ASCII" /></p>
-			<iframe id="uploadframe" name="uploadframe" src="" ></iframe>
+			<iframe id="uploadframe" name="uploadframe" src=""></iframe>
 	</form>
 </div>
 
-
+<p id="result"></p>
 
 </body>
 </html>

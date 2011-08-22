@@ -34,9 +34,10 @@ else {
 		}
 		
 		else {
-			if(file_get_contents($_POST['url_image'])) {
+			$img;
+			if($img = file_get_contents($_POST['url_image'])) {
 				$name = $oname . find_extension($_POST['url_image']);
-				file_put_contents("./images/" . $name);
+				file_put_contents("./images/" . $name, $img);
 			}
 			else {
 				$response = "Could not read file...";
@@ -45,19 +46,32 @@ else {
 	}
 }
 
+//do we want the result for a file?
+$forfile = 0;
+if($_POST['forfile'] == "on") {
+	$forfile = 1;
+	echo("asdfEDJKLHSKHD");
+}
+
+
 if($response == "") {
-	//now call the python script, which does the fancy stuff...
-	$call = "python itoa.py ./images/$name ./ascii/$oname.txt";
-/* 	system($call); */
-/* 	system("echo 'hi' > text.txt"); */
-/* 	echo($name ." ". $oname); */
-/* 	echo("this is it: "); */
-/* 	print_r(exec("bash do_python.sh $name $oname", $a, $b)); */
 	
-	print_r(exec($call, $a, $b));
-	print_r($a);
-	print_r($b."<br/>");
-/* 	$response.= "called python: $call"; */
+	$call = "python itoa.py ./images/$name ./ascii/$oname.txt";
+	
+	if($forfile) {
+		$call .= " True";
+	} 
+	else {
+		$call .= " False";
+	}
+	
+	//excute python script with the right PATH
+	exec("PATH=/opt/local/bin:/opt/local/sbin:$PATH; $call", $a, $b);
+	
+	echo($call);
+	
+	//open file and get response
+	$response = file_get_contents("./ascii/$oname.txt");
 }
 
 //spit out the response

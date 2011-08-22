@@ -9,14 +9,16 @@ import Image
 datafile = "colour_data"
 
 
-#passed the name of the image and and the scale factor
-def doimage(inputfile, outputfile, desiredwidth):
+def doimage(inputfile, outputfile, desiredwidth, forfile):
 	
 	img = Image.open(inputfile)
-	
+		
 	width = int(desiredwidth);
 	height = int((float(desiredwidth)/img.size[0])*img.size[1])
-
+	
+	if(forfile == "True"):
+		height/= 2
+	
 	#create a new image with the new dimensions
 	img = img.resize((width, height), Image.BICUBIC);
 	
@@ -25,6 +27,7 @@ def doimage(inputfile, outputfile, desiredwidth):
 	
 	f = open("./"+datafile, 'r');
 	sr = pickle.load(f);
+	f.close()
 	
 	with open(outputfile, 'w') as f:
 	
@@ -50,7 +53,7 @@ def doimage(inputfile, outputfile, desiredwidth):
 				f.write("<br />\n")
 					
 		f.close()
-		print "apparently closed"
+
 	
 #a little helper function to access pixels array
 def getloc(x, y, w):
@@ -115,7 +118,7 @@ def main():
 			getletters()
 			
 	else:	
-		doimage(sys.argv[1], sys.argv[2], 100);
+		doimage(sys.argv[1], sys.argv[2], 100, sys.argv[3]);
 
 
 	# 	#check arguments are there
