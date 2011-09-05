@@ -9,30 +9,36 @@ function go() {
 	var thetext = ""
 	var imgpath = "images/"
 	
+	var change = document.getElementById("change")
+	
 	ifr2.onload = function() { 
 
 		var r = ifr.document.getElementById("response")
 		var path = ifr.document.getElementById("imagename")
+
+		clearInterval(showprogress)
+		p.innerHTML = r.innerHTML;
 		
-		if(r != null) {
-			console.log("done") 
-			clearInterval(showprogress)
-			p.innerHTML = "<p class=\"tosee\">Click on the ASCII to see the original image</p>"
-			p.innerHTML += r.innerHTML
+		if(r != null && r.innerHTML != "sorry, couldn't do it with that file...") {
+			change.innerHTML = "Click here to see the original image"
+			p.innerHTML = r.innerHTML
 			thetext = r.innerHTML
-			p.setAttribute("type", "ascii")
+			change.setAttribute("type", "ascii")
+			change.style.backgroundColor = "#fffa5c"
 			
-			p.onmousedown = function() {
+			
+			change.onmousedown = function() {
 				if(this.getAttribute("type") == "image") {
-					this.innerHTML = "<p class=\"tosee\">Click on the ASCII to see the original image</p>"
-					this.innerHTML += thetext
+					change.innerHTML = "Click on the ASCII to see the original image"
+					p.innerHTML = thetext
 					this.setAttribute("type", "ascii")
 				}
 				else {
-					this.innerHTML = "<p class=\"tosee\">Click on the image to see the ASCII</p>"
+					change.innerHTML = "Click here to see the ASCII"
+					p.innerHTML = ""
 					var img = document.createElement("img")
 					img.src = imgpath + path.innerHTML
-					this.appendChild(img)
+					p.appendChild(img)
 					this.setAttribute("type", "image")
 				}
 			}
@@ -43,9 +49,7 @@ function go() {
 	
 	var form = document.getElementsByTagName("form")[0]
 	
-	form.onsubmit = function() {
-		console.log("submit")
-		
+	form.onsubmit = function() {		
 		showprogress = setInterval(function() {
 			
 			var n = 20

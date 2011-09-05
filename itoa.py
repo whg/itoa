@@ -1,6 +1,4 @@
 
-print "begin"
-
 import os, sys, math
 import bisect
 import pickle
@@ -16,7 +14,7 @@ def doimage(inputfile, outputfile, desiredwidth, forfile):
 	width = int(desiredwidth);
 	height = int((float(desiredwidth)/img.size[0])*img.size[1])
 	
-	if(forfile == "True"):
+	if forfile == "True":
 		height/= 2
 	
 	#create a new image with the new dimensions
@@ -27,10 +25,13 @@ def doimage(inputfile, outputfile, desiredwidth, forfile):
 	pixeldata = []
 	
 	try:
-		if(len(pixels[0]) == 3):
+		if len(pixels[0]) == 3:
 			pixeldata = [(r+g+b)/3 for r,g,b in pixels]
+		elif len(pixels[0]) == 4:
+			pixeldata = [(r+g+b)/3 for r,g,b,a in pixels]
 	except TypeError:
 		pixeldata = pixels
+		print "type error"
 	
 	f = open("./"+datafile, 'r');
 	sr = pickle.load(f);

@@ -50,7 +50,6 @@ else {
 $forfile = 0;
 if($_POST['forfile'] == "on") {
 	$forfile = 1;
-	echo("asdfEDJKLHSKHD");
 }
 
 
@@ -65,7 +64,8 @@ if($response == "") {
 		$call .= " False";
 	}
 	
-	//excute python script with the right PATH
+	//execute python script with the right PATH
+	//i need this because i use macports...
 	exec("PATH=/opt/local/bin:/opt/local/sbin:$PATH; $call", $a, $b);
 	print_r($a);
 	print_r($b);
